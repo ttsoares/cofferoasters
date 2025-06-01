@@ -16,7 +16,9 @@ const Collection = () => {
         <View className='flex flex-col md:flex-row lg:flex-col justify-center items-center md:mt-24 lg:mt-10'>
           <Image
             style={{ width: 120, height: 140 }}
-            source={require("@/assets/images/home/desktop/image-gran-espresso.png")} />
+            source={require("@/assets/images/home/desktop/image-gran-espresso.png")}
+            alt='bag of coffee gran expresso beans'
+          />
           <View>
             <MyText className="mt-10 text-size24 text-center" >Gran Expresso</MyText>
             <MyText className='max-w-[200px] font-barlowR text-size16 text-c_greyblack text-center mt-5'>
@@ -28,7 +30,9 @@ const Collection = () => {
         <View className='flex flex-col md:flex-row lg:flex-col justify-center items-center'>
           <Image
             style={{ width: 120, height: 140 }}
-            source={require("@/assets/images/home/desktop/image-planalto.png")} />
+            source={require("@/assets/images/home/desktop/image-planalto.png")}
+            alt='bag of coffee planalto beans'
+          />
           <View>
             <MyText className="mt-10 text-size24 text-center" >Planalto</MyText>
             <MyText className='max-w-[200px] font-barlowR text-size16 text-c_greyblack text-center mt-5'>
@@ -40,7 +44,9 @@ const Collection = () => {
         <View className='flex flex-col md:flex-row lg:flex-col justify-center items-center'>
           <Image
             style={{ width: 120, height: 140 }}
-            source={require("@/assets/images/home/desktop/image-piccollo.png")} />
+            source={require("@/assets/images/home/desktop/image-piccollo.png")}
+            alt='bag of coffee piccollo beans'
+          />
           <View>
             <MyText className="mt-10 text-size24 text-center" >Piccollo</MyText>
             <MyText className='max-w-[200px] font-barlowR text-size16 text-c_greyblack text-center mt-5'>
@@ -52,7 +58,9 @@ const Collection = () => {
         <View className='flex flex-col md:flex-row lg:flex-col justify-center items-center'>
           <Image
             style={{ width: 120, height: 140 }}
-            source={require("@/assets/images/home/desktop/image-danche.png")} />
+            source={require("@/assets/images/home/desktop/image-danche.png")}
+            alt='bag of coffee danche beans'
+          />
           <View>
             <MyText className="mt-10 text-size24 text-center" >Danche</MyText>
             <MyText className='max-w-[200px] font-barlowR text-size16 text-c_greyblack text-center mt-5'>

@@ -2,7 +2,6 @@ import { ImageBackground, useWindowDimensions, View } from 'react-native';
 import MyButton from '../MyButton';
 import MyText from '../MyText';
 
-
 export default function Hero() {
 
   const { width } = useWindowDimensions();
@@ -21,7 +20,7 @@ export default function Hero() {
         : require("@/assets/images/home/mobile/image-hero-coffeepress.jpg");
 
   return (
-    <View className="w-full px-5 md:px-10 lg:md-20">
+    <View className="w-[90%]">
       <View
         className="w-full overflow-hidden mt-20 md:mt-0 "
         style={{ height: heroHeight, borderRadius: 16 }}
@@ -32,6 +31,7 @@ export default function Hero() {
           style={{
             width: '100%', height: '100%'
           }}
+          alt='image-coffeepress'
         >
           <View className="
           flex flex-col justify-center items-center mt-28

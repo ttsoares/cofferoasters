@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "creativeAgency",
-    "slug": "creativeAgency",
+    "slug": "cofferoasters",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -51,8 +51,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": ""
+        "projectId": "e63fd68a-28d0-4e70-a2e1-69c99a770c13"
       }
-    }
+    },
+    "owner": "ttsoares"
   }
 }

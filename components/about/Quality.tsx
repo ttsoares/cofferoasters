@@ -28,6 +28,7 @@ const Quality = () => {
         style={{
           width: '100%', height: '100%', overflow: 'visible', position: 'relative'
         }}
+        alt="Gray background"
       >
         <View className='w-full lg:w-1/2 h-full'>
           <View className='mt-28 md:mt-56 lg:mt-32 lg:ml-16'>
@@ -52,9 +53,9 @@ const Quality = () => {
           <Image
             source={imageSource2}
             resizeMode='contain'
-            alt='quality'
             style={{ width: '100%', height: '100%' }}
             className='rounded-xl absolute '
+            alt="A table with coffee tools"
           />
         </View>
       </ImageBackground>

@@ -14,7 +14,7 @@ function Card({ title, body, onPress, state }: CardProps) {
   return (
     <Pressable
       onPress={onPress}
-      className={`w-[328px] h-[200px] md:w-[223px] md:h-[250px] lg:w-[228px]  rounded-lg shadow-md lg:p-4 lg:m-2
+      className={`w-[328px] h-[200px] md:w-[223px] md:h-[250px] lg:w-[228px] rounded-lg lg:p-4 lg:m-2 shadow-[3px_3px_6px_rgba(0,0,0,0.25)]
         ${state ? 'bg-c_cyan' : 'bg-gray-200'}
         ${state ? '' : 'hover:bg-c_orange'}
         `

@@ -35,7 +35,7 @@ export default function Navigation() {
   };
 
   const drawerOpacity = drawerAnim.interpolate({
-    inputRange: [-30, 2], // adjust as needed
+    inputRange: [-30, 2],
     outputRange: [0, 1],   // fades in as it slides in
     extrapolate: 'clamp',
   });

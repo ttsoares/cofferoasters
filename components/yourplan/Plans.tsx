@@ -1,5 +1,4 @@
-import IconArrow from '@/assets/images/plan/desktop/icon-arrow';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Animated,
   Easing,
@@ -7,6 +6,7 @@ import {
   LayoutChangeEvent,
   Modal,
   Pressable,
+  ScrollView,
   useWindowDimensions,
   View
 } from 'react-native';
@@ -15,12 +15,7 @@ import MyText from '../MyText';
 import { heads, options } from '@/data/options';
 
 import MyButton from '../MyButton';
-import Card from './Card';
-
-type CardType = {
-  title: string;
-  body: string;
-};
+import OptionSection from './OptionSection';
 
 interface SectionState {
   open: boolean;
@@ -55,13 +50,9 @@ const Plans = () => {
   const [grindOp, setGrindOp] = useState("");
   const [deliveries, setDeliveries] = useState("");
 
-  const [choosedOps, setChoosedOps] = useState([
-    [false, false, false],
-    [false, false, false],
-    [false, false, false],
-    [false, false, false],
-    [false, false, false]
-  ]);
+  const [choosedOps, setChoosedOps] = useState(
+    new Array(5).fill(false).map(() => new Array(3).fill(false))
+  );
 
   const toggleSection = (index: number) => {
     setSections((prev) => {
@@ -143,9 +134,33 @@ const Plans = () => {
     setRaedy2order(OK2order);
   };
 
+  function closeReset() {
+    setChoosedOps([
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ]);
+    setRaedy2order(false);
+    setModalVisible(false);
+    setPreferences("");
+    setBeanType("");
+    setQuantity("");
+    setGrindOp("");
+    setDeliveries("");
+  }
+
+  function openModal() {
+    setModalVisible(true);
+    scrollRef.current?.scrollTo({ y: 0, animated: true });
+  }
+
+  const scrollRef = useRef<ScrollView>(null);
+
   return (
-    <>
-      <View className="w-full px-2 md:px-5  md:flex-row mt-[4rem]">
+    <View className='relative w-full'>
+      <View className="w-[85%] md:flex-row mt-[4rem]">
         {/* left */}
         <View className='w-[35%] hidden lg:flex justify-start items-center '>
           <View className='w-60%'>
@@ -198,49 +213,19 @@ const Plans = () => {
         {/* right */}
         <View className='w-full lg:w-[65%]'>
           <View className="lg:p-4 ">
-            {options.map((cards, line) => {
-              const section = sections[line];
-              return (
-                <View
-                  key={line}
-                  className="mb-2 border border-c_lcream rounded-md overflow-hidden hover:border-c_greylight "
-                >
-                  <Pressable
-                    onPress={() => toggleSection(line)}
-                    className="flex-row justify-between items-center md:px-4 py-3 bg-c_lcream"
-                  >
-                    <MyText className="font-black text-size24 lg:text-size40 text-c_grey">{heads[line]}</MyText>
-                    <IconArrow state={section?.open} />
-                  </Pressable>
-
-                  <Animated.View style={{
-                    height: section?.animation,
-                    opacity: section?.animation.interpolate({
-                      inputRange: [0, section?.height || 250], // Adjust based on your content height
-                      outputRange: [0, 1],
-                      extrapolate: 'clamp',
-
-                    }),
-                    overflow: 'hidden'
-                  }}>
-                    <View
-                      className="px-2 py-3 md:flex-row flex-wrap justify-around "
-                      onLayout={(e) => handleLayout(line, e)}
-                    >
-                      {cards.map((card: CardType, col) => (
-                        <Card
-                          key={col}
-                          title={card.title}
-                          body={card.body}
-                          onPress={() => updateOptions(line, col)}
-                          state={choosedOps[line][col]}
-                        />
-                      ))}
-                    </View>
-                  </Animated.View>
-                </View>
-              );
-            })}
+            {options.map((cards, index) => (
+              <OptionSection
+                key={index}
+                title={heads[index]}
+                sectionIndex={index}
+                cards={cards}
+                sectionState={sections[index]}
+                choosedOps={choosedOps[index]}
+                toggleSection={toggleSection}
+                handleLayout={handleLayout}
+                updateOptions={updateOptions}
+              />
+            ))}
           </View>
           <View className='w-full items-center h-fit'>
             <ImageBackground
@@ -269,20 +254,22 @@ const Plans = () => {
           </View>
           <MyButton
             state={`${ready2order ? 'active' : 'inactive'}`}
-            onPress={() => setModalVisible(true)}
+            onPress={openModal}
             className='mt-6 mr-5 self-center md:self-end' >Create my plan</MyButton>
         </View>
       </View>
+      {/* M O D A L */}
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
+        style={{ position: 'relative' }}
       >
         {/* overlay */}
         <View className="flex-1 justify-start bg-black/50">
           {/* modal content */}
-          <View className="w-[373px] md:max-w-[450px] bg-white rounded-xl shadow-lg mt-24 md:mx-auto">
+          <View className="w-[373px] md:max-w-[450px] bg-white rounded-xl mt-24 md:mx-auto absolute bottom-0 left-0 right-0">
             <View className='justify-center items-center bg-c_greyblack px-6 py-4 rounded-t-xl'>
               <MyText className="text-center text-size24 lg:text-size32 font-bold text-white p-3">
                 Order Summary
@@ -310,9 +297,7 @@ const Plans = () => {
             <View className="flex-row justify-between items-center mt-4 p-12">
               <MyText className="text-size24 font-bold text-c_greyblack">$14.00/mo</MyText>
               <Pressable
-                onPress={() => {
-                  setModalVisible(false);
-                }}
+                onPress={closeReset}
                 className="bg-c_cyan px-4 py-2 rounded-lg"
               >
                 <MyText className="text-white font-bold">Checkout</MyText>
@@ -321,7 +306,7 @@ const Plans = () => {
           </View>
         </View>
       </Modal>
-    </>
+    </View>
   )
 }
 

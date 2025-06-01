@@ -21,7 +21,7 @@ const Footer = () => {
   const router = useRouter();
 
   return (
-    <View className='w-full px-5 md:px-10 mt-[8rem] lg:px-20'>
+    <View className='w-[90%] mt-[8rem]'>
       <View className='h-[18rem] lg:h-[7rem] w-full px-20 bg-c_greyblack items-center lg:flex-row justify-center space-y-9 lg:space-y-0'>
         <View className='lg:flex-row justify-between items-center lg:w-[50%] w-full space-y-9 lg:space-y-0'>
           <Logo pathFill="#FFFFFF" />

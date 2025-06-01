@@ -29,6 +29,7 @@ const Hero = () => {
         style={{
           width: '100%', height: '100%', borderRadius: 20, borderWidth: 2, borderColor: '#fff', overflow: 'hidden',
         }}
+        alt="white cup of coffee"
       >
         <View className='ml-8 md:ml-20 justify-start w-[70%] md:max-w-[45%] text-center md:text-left  my-auto'>
           <MyText className="text-size24 md:text-size40 font-black text-white text-center md:text-left">About Us</MyText>

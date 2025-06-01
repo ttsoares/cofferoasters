@@ -35,6 +35,7 @@ const OurCommitment = () => {
           source={imageSource}
           resizeMode="contain"
           style={{ width: '100%', height: '100%' }}
+          alt="Man making coffee"
         />
       </View>
       <View className='md:ml-8 w-[90%] md:w-[40%]  lg:ml-20 '>

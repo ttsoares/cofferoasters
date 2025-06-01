@@ -27,11 +27,12 @@ const Hero = () => {
         style={{
           width: '100%', height: '100%', borderRadius: 20, borderWidth: 2, borderColor: '#fff', overflow: 'hidden',
         }}
+        alt="black cup of coffee"
       >
         <View className='ml-8 md:ml-10 justify-start w-[70%] md:max-w-[65%] text-center md:text-left  my-auto'>
           <MyText className="text-size24 md:text-size40 lg:text-size72 font-black text-white text-center md:text-left">
             Create plan</MyText>
-          <MyText className="text-size16 md:text-size18 font-barlowR text-white text-left mt-10 md:w-[90%] lg:max-w-[80%]">
+          <MyText className="text-size16 md:text-size18 font-barlowR text-white text-left mt-10 md:w-[90%] lg:max-w-[65%]">
             Build a subscription plan that best fits your needs. We offer an assortment of the best artisan coffees from around the globe delivered fresh to your door.
           </MyText>
         </View>
