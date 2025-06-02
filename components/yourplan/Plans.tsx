@@ -221,6 +221,7 @@ const Plans = () => {
                 cards={cards}
                 sectionState={sections[index]}
                 choosedOps={choosedOps[index]}
+                allOptions={choosedOps}
                 toggleSection={toggleSection}
                 handleLayout={handleLayout}
                 updateOptions={updateOptions}

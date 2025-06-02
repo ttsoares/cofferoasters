@@ -18,6 +18,7 @@ interface OptionSectionProps {
     open: boolean;
   };
   choosedOps: boolean[];
+  allOptions: boolean[][];
   toggleSection: (index: number) => void;
   handleLayout: (index: number, e: any) => void;
   updateOptions: (optionIndex: number, cardIndex: number) => void;
@@ -29,17 +30,29 @@ const OptionSection = ({
   cards,
   sectionState,
   choosedOps,
+  allOptions,
   toggleSection,
   handleLayout,
   updateOptions,
 }: OptionSectionProps) => {
+
+  const disableGrind = allOptions[0][0]
+
+  function confirmToggle(index: number) {
+
+    if (disableGrind) {
+      return;
+    }
+    toggleSection(index);
+  }
+
   return (
     <View className="mb-2 border border-c_lcream rounded-md overflow-hidden hover:border-c_greylight">
       <Pressable
-        onPress={() => toggleSection(sectionIndex)}
+        onPress={() => confirmToggle(sectionIndex)}
         className="flex-row justify-between items-center md:px-4 py-3 bg-c_lcream"
       >
-        <MyText className="font-black text-size24 lg:text-size40 text-c_grey">{title}</MyText>
+        <MyText className={`font-black text-size24 lg:text-size40 ${(disableGrind && sectionIndex === 3) ? 'text-c_greylight' : 'text-c_grey'} `}>{title}</MyText>
         <IconArrow state={sectionState.open} />
       </Pressable>
 
