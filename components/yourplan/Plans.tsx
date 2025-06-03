@@ -33,6 +33,7 @@ const Plans = () => {
         ? require("@/assets/images/plan/tablet/bg-order-summary.png")
         : require("@/assets/images/plan/mobile/bg-order-summary.png");
 
+  // for the accordion
   const [sections, setSections] = useState<SectionState[]>(
     options.map(() => ({
       open: false,
@@ -49,6 +50,9 @@ const Plans = () => {
   const [quantity, setQuantity] = useState("");
   const [grindOp, setGrindOp] = useState("");
   const [deliveries, setDeliveries] = useState("");
+
+  const [total, setTotal] = useState(0);
+
 
   const [choosedOps, setChoosedOps] = useState(
     new Array(5).fill(false).map(() => new Array(3).fill(false))
@@ -107,7 +111,7 @@ const Plans = () => {
 
     setChoosedOps(prev);
 
-    // Clear the corresponding state if nothing is selected
+    // Clear the corresponding state if an already selected option is clicked again
     if (wasSelected) {
       switch (optionIndex) {
         case 0: setPreferences(""); break;
@@ -131,6 +135,24 @@ const Plans = () => {
       (choosedOps[1][0] || choosedOps[1][1] || choosedOps[1][2]) &&
       (choosedOps[2][0] || choosedOps[2][1] || choosedOps[2][2]) &&
       (choosedOps[4][0] || choosedOps[4][1] || choosedOps[4][2]);
+
+    /*
+    0 preferences
+    1 bean type
+    2 quantity
+    3 grind option
+    4 deliveries
+    */
+
+    const preferencesMultiplier = choosedOps[0][0] && options[0][0].how || choosedOps[0][1] && options[0][1].how || choosedOps[0][2] && options[0][2].how;
+    const beanTypeMultiplier = choosedOps[1][0] && options[1][0].type || choosedOps[1][1] && options[1][1].type || choosedOps[1][2] && options[1][2].type;
+    const quantityMultiplier = choosedOps[2][0] && options[2][0].qtt || choosedOps[2][1] && options[2][1].qtt || choosedOps[2][2] && options[2][2].qtt;
+    const grindOptionMultiplier = choosedOps[3][0] && options[3][0].grind || choosedOps[3][1] && options[3][1].grind || choosedOps[3][2] && options[3][2].grind;
+    const deliveriesMultiplier = choosedOps[4][0] && options[4][0].freq || choosedOps[4][1] && options[4][1].freq || choosedOps[4][2] && options[4][2].freq;
+
+    const total = preferencesMultiplier * beanTypeMultiplier * quantityMultiplier * grindOptionMultiplier * deliveriesMultiplier;
+    setTotal(Number(total.toFixed(2)));
+
     setRaedy2order(OK2order);
   };
 
@@ -296,7 +318,9 @@ const Plans = () => {
             </MyText>
 
             <View className="flex-row justify-between items-center mt-4 p-12">
-              <MyText className="text-size24 font-bold text-c_greyblack">$14.00/mo</MyText>
+              <MyText className="text-size24 font-bold text-c_greyblack">
+                ${total}/mo
+              </MyText>
               <Pressable
                 onPress={closeReset}
                 className="bg-c_cyan px-4 py-2 rounded-lg"
